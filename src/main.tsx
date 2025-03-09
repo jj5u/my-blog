@@ -11,10 +11,11 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const root = document.getElementById("root");
 const queryClient = new QueryClient();
+const base = import.meta.env.MODE === "development" ? "/" : "/my-blog/";
 if (root) {
   ReactDOM.createRoot(root).render(
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename={base}>
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />

@@ -25,6 +25,11 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile # 의존성 설치 (lockfile 기반)
 
+      - name: Set Environment Variables # ✅ 환경 변수는 `build` 전에 설정되어야 함
+        run: |
+          echo "VITE_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> $GITHUB_ENV
+          echo "VITE_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> $GITHUB_ENV
+
       - name: Run Tests
         run: yarn test # Jest 같은 테스트 실행
 
@@ -39,6 +44,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # ✅ 모든 커밋 히스토리를 가져와서 `gh-pages` 브랜치 최신화 가능
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -49,16 +56,9 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build Project
-        run: yarn build
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3 # GitHub Pages 배포
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist # 빌드된 파일이 있는 폴더
-
-      - name: Set Environment Variables
-        run: |
-          echo "VITE_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> $GITHUB_ENV
-          echo "VITE_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> $GITHUB_ENV
+          force_orphan: true # ✅ 기존 `gh-pages` 브랜치를 삭제하고 새로 생성
