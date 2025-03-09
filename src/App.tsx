@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import Home from "./pages/Home";
-import { Link, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import Nav from "./components/Nav";
 
 function App() {

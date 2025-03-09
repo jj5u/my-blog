@@ -1,4 +1,3 @@
-import React from "react";
 import { useFetchBlogs } from "../hooks/useFetchBlogs";
 interface BlogProps {
   id: number;
