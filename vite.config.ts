@@ -5,7 +5,7 @@ import { resolve } from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/my-blog/",
+  base: "/",
   esbuild: {
     legalComments: "none", // 불필요한 주석 제거
   },
