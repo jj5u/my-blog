@@ -14,6 +14,14 @@ export default function Nav() {
           <span>Home</span>
         </NavLink>
         <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            `flex items-center justify-center p-4 w-32 h-10 cursor-pointer transition-colors last-of-type:rounded-br-xl last-of-type:rounded-tr-xl ${isActive ? "text-red-500 underline-offset-2 underline" : "text-black hover:bg-slate-100"}`
+          }
+        >
+          <span>About</span>
+        </NavLink>
+        <NavLink
           to="/blog"
           className={({ isActive }) =>
             `flex items-center justify-center p-4 w-32 h-10 cursor-pointer transition-colors last-of-type:rounded-br-xl last-of-type:rounded-tr-xl ${isActive ? "text-red-500 underline-offset-2 underline" : "text-black hover:bg-slate-100"}`

@@ -7,24 +7,28 @@ import Projects from "./pages/Projects";
 import "./index.css";
 import Blog from "./pages/Blog";
 import BlogList from "./pages/BlogList";
-
+import About from "./pages/About";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const root = document.getElementById("root");
-
+const queryClient = new QueryClient();
 if (root) {
   ReactDOM.createRoot(root).render(
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-
-          <Route path="projects" element={<Projects />} />
-
-          <Route path="blog" element={<Blog />}>
-            <Route index element={<BlogList />} />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="blog" element={<Blog />}>
+              <Route index element={<BlogList />} />
+            </Route>
+            <Route path="projects" element={<Projects />} />
           </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
   );
 } else {
   console.error("Failed to find the root element");
