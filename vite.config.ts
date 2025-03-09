@@ -10,7 +10,7 @@ export default defineConfig({
     legalComments: "none", // 불필요한 주석 제거
   },
   build: {
-    minify: "terser", // Terser를 사용하여 eval 제거
+    minify: "esbuild", // vite v5 이상부터 esbuild로 변경
     terserOptions: {
       compress: {
         drop_console: true, // 콘솔 로그 제거
